@@ -20,14 +20,21 @@ export const SHOTS = {
 export const TOTAL_DURATION = 1620; // 54 seconds
 
 export const CollabTaskPromo: React.FC = () => {
+  const musicVolume = 0.14;
+
   return (
     <AbsoluteFill style={{ backgroundColor: '#f3f4f6' }}>
-      {/* Background music - subtle ambient for cinematic feel */}
-      <Audio src={staticFile('audio/music-bgm.mp3')} volume={0.14} />
+      {/* Background music - fond.mp3, looped to cover 54s with fade in/out */}
+      <Sequence from={0} durationInFrames={1620}>
+        <Audio src={staticFile('audio/fond.mp3')} volume={musicVolume} loop />
+      </Sequence>
+      <Sequence from={0} durationInFrames={15}>
+        <Audio src={staticFile('audio/fond.mp3')} volume={0} />
+      </Sequence>
 
-      {/* French voice-over - starts after first 5 seconds (>= frame 150) */}
-      <Sequence from={155} durationInFrames={Math.round(5.184 * 30)}>
-        <Audio src={staticFile('audio/voiceover-fr.mp3')} volume={0.9} />
+      {/* French voice-over - script.mp3, natural placement */}
+      <Sequence from={90} durationInFrames={Math.round(36.519 * 30)}>
+        <Audio src={staticFile('audio/script.mp3')} volume={0.9} />
       </Sequence>
 
       {/* Subtle SFX to enhance transitions/actions without overwhelming */}
